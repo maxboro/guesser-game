@@ -9,3 +9,10 @@ Run the program:
 ```bash
 ./guesser_windows
 ```
+
+Compile the whole project:
+```bash
+make        # Builds the project
+./game      # Runs the executable
+make clean  # Cleans up build files
+```
