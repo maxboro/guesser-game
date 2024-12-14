@@ -1,4 +1,4 @@
 .vscode
-logs
-build
-bin
+logs/
+build/
+bin/
