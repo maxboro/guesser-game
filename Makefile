@@ -1,6 +1,6 @@
 # Compiler and flags
 CC = g++
-CFLAGS = -Wall -g -Iinclude
+CFLAGS = -Wall -g -Iinclude -O3
 
 # Directories
 SRC_DIR = src
