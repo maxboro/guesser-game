@@ -13,7 +13,7 @@ public:
     GameManager(unordered_map<string, int> settings): _settings(settings) {}
     void game_init(GameEngine *game_engine_inst, Logger *logger);
     void run_game_loop();
-    void show_current_game_status();
+    string get_current_game_status();
     
 private:
     GameEngine* _game_engine_inst;

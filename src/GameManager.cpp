@@ -5,7 +5,7 @@
 
 using namespace std;
 
-
+// Game exit by "e" check
 void GameManager::_check_for_exit_request(string &user_input){
     if (user_input == "e") {
         _logger->info("Exit is requested");
@@ -29,8 +29,12 @@ void GameManager::game_init(GameEngine *game_engine_inst, Logger *logger){
     _logger = logger;
     _logger->info("game init");
     _game_engine_inst = game_engine_inst;
+
+    // Set number to guess
     int number_to_guess = _get_random_number(_settings["min_val"], _settings["max_val"]);
     _logger->info("Number to guess: " + to_string(number_to_guess));
+
+    // Set session
     _game_engine_inst->set_game(number_to_guess, _settings["n_lives"]);
     _logger->info("Game engine is set");
 }
@@ -66,6 +70,10 @@ void GameManager::run_game_loop(){
     
 }
     
-void GameManager::show_current_game_status(){
-    cout << "Lives: " << _game_engine_inst->get_lives() << "; Number was: " << _game_engine_inst->get_number() << endl;
+string GameManager::get_current_game_status(){
+    string live_info, number_info, current_status;
+    live_info = "Lives: " + to_string(_game_engine_inst->get_lives());
+    number_info = "Number was: " + to_string( _game_engine_inst->get_number());
+    current_status = "Current status: " + live_info + "; " + number_info;
+    return current_status;
 }
