@@ -5,6 +5,7 @@
 
 class Logger{
 public:
+    virtual ~Logger() = default;
     void info(const std::string& msg);
     void error(const std::string& msg);
 protected:
