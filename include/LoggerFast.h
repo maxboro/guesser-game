@@ -12,7 +12,6 @@ public:
 protected:
     void _log(const std::string& msg, std::string type) override;
 private:
-    std::string _log_file_name;
     std::ofstream _log_file;
     void _write_to_logfile(std::string logging_line);
 };

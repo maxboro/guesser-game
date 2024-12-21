@@ -6,6 +6,12 @@
 using namespace std;
 
 
+Logger::Logger(const unordered_map<string, int>& settings){
+    _settings = settings;
+    _perform_logging = _settings["logging"];
+    _log_file_name = "./logs/run_log"+_get_current_timestamp()+".log";
+}
+
 string Logger::_get_current_timestamp() const {
     // time_t timestamp = time(NULL);
     auto now = chrono::system_clock::now();

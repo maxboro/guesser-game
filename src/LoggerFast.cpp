@@ -6,11 +6,7 @@
 
 using namespace std;
 
-LoggerFast::LoggerFast(const unordered_map<string, int>& settings){
-    _settings = settings;
-    _perform_logging = _settings["logging"];
-    _log_file_name = "./logs/run_log"+_get_current_timestamp()+".log";
-
+LoggerFast::LoggerFast(const unordered_map<string, int>& settings): Logger(settings){
     if (_perform_logging){
         cout << "Logging is enabled" << endl;
         cout << "Fast logging mode" << endl;
