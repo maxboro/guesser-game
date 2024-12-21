@@ -3,9 +3,7 @@
 
 #include <unordered_map>
 
-using namespace std;
-
-unordered_map<string, int> read_config();
+std::unordered_map<std::string, int> read_config();
 bool ask_for_rerun();
 
 #endif
