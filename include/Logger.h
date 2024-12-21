@@ -3,17 +3,15 @@
 
 #include <unordered_map>
 
-using namespace std;
-
 class Logger{
 public:
-    void info(const string& msg);
-    void error(const string& msg);
+    void info(const std::string& msg);
+    void error(const std::string& msg);
 protected:
-    unordered_map<string, int> _settings;
+    std::unordered_map<std::string, int> _settings;
     bool _perform_logging;
-    string _get_current_timestamp() const;
-    virtual void _log(const string& msg, string type) = 0;
+    std::string _get_current_timestamp() const;
+    virtual void _log(const std::string& msg, std::string type) = 0;
 };
 
 #endif

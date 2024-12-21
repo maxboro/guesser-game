@@ -5,18 +5,16 @@
 #include <fstream>
 #include "Logger.h"
 
-using namespace std;
-
 class LoggerFast : public Logger {
 public:
-    LoggerFast(const unordered_map<string, int>& settings);
+    LoggerFast(const std::unordered_map<std::string, int>& settings);
     ~LoggerFast();
 protected:
-    void _log(const string& msg, string type) override;
+    void _log(const std::string& msg, std::string type) override;
 private:
-    string _log_file_name;
-    ofstream _log_file;
-    void _write_to_logfile(string logging_line);
+    std::string _log_file_name;
+    std::ofstream _log_file;
+    void _write_to_logfile(std::string logging_line);
 };
 
 #endif
