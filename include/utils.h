@@ -3,9 +3,9 @@
 
 #include <unordered_map>
 
-using namespace std;
+std::unordered_map<std::string, int> read_config();
 
-unordered_map<string, int> read_config();
+// Ask user for rerun and process answer
 bool ask_for_rerun();
 
 #endif

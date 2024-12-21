@@ -3,11 +3,10 @@
 #include <unordered_map>
 #include <string>
 
-using namespace std;
-
+// Executes game rules based of provided input
 class GameEngine {
 public:
-    GameEngine(unordered_map<string, int> settings): _settings(settings) {};
+    GameEngine(std::unordered_map<std::string, int> settings): _settings(settings) {};
 
     void set_game(int number, int lives);
     bool guess(int n);
@@ -19,7 +18,7 @@ public:
 
 private:
     int _number, _lives;
-    unordered_map<string, int> _settings;
+    std::unordered_map<std::string, int> _settings;
     bool _is_game_running = false;
 };
 
