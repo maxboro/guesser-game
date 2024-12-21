@@ -6,6 +6,7 @@
 #include "GameEngine.h"
 #include "Logger.h"
 
+// Manages interactions between user and game
 class GameManager {
 public:
     GameManager(std::unordered_map<std::string, int> settings): _settings(settings) {}

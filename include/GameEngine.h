@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <string>
 
+// Executes game rules based of provided input
 class GameEngine {
 public:
     GameEngine(std::unordered_map<std::string, int> settings): _settings(settings) {};
