@@ -2,3 +2,4 @@ min_val=0
 max_val=10
 n_lives=3
 logging=1
+fast_logging=0

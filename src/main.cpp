@@ -1,24 +1,34 @@
 #include <iostream>
+#include <memory>
 #include "GameEngine.h"
 #include "GameManager.h"
 #include "Logger.h"
+#include "LoggerFast.h"
+#include "LoggerResSafe.h"
 #include "utils.h"
 
 using namespace std;
 
 // Session loop
 void run(unordered_map<string, int> settings, bool &exit_is_requested){
-    Logger logger {settings};
+    unique_ptr<Logger> logger;
+
+    if (settings["fast_logging"] == 1) {
+        logger = make_unique<LoggerFast>(settings);
+    } else {
+        logger = make_unique<LoggerResSafe>(settings);
+    }
+    
     GameManager manager_inst {settings};
     GameEngine game_engine_inst {settings};
 
-    manager_inst.game_init(&game_engine_inst, &logger);
+    manager_inst.game_init(&game_engine_inst, logger.get());
     try {
         manager_inst.run_game_loop();
-    } catch (const std::runtime_error& e) {
-        logger.error(e.what());
-        logger.info(manager_inst.get_current_game_status());
-        std::cout << "Game loop interrupted: " << e.what() << std::endl;
+    } catch (const runtime_error& e) {
+        logger->error(e.what());
+        logger->info(manager_inst.get_current_game_status());
+        cout << "Game loop interrupted: " << e.what() << endl;
         exit_is_requested = true;
     }
 }
