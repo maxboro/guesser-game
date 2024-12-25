@@ -24,26 +24,28 @@ logging: 1
 fast_logging: 0
 Read all
 Settings are loaded.
+
 Logging is enabled
 Safe logging mode
-write you guess: 1
-Nope. This is not a 1
+write you guess: 4
+Nope. This is not a 4
 write you guess: 2
 Nope. This is not a 2
-write you guess: 3
-Nope. This is not a 3
+write you guess: 1
+Nope. This is not a 1
 No more lives
 End of game loop
 Wanna rerun? y / n: y
 Ok, let's rerun
+
 Logging is enabled
 Safe logging mode
-write you guess: 1
-Nope. This is not a 1
 write you guess: 2
 Nope. This is not a 2
-write you guess: 3
-Nope. This is not a 3
+write you guess: 1
+Nope. This is not a 1
+write you guess: 4
+Nope. This is not a 4
 No more lives
 End of game loop
 Wanna rerun? y / n: n
