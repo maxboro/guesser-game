@@ -25,11 +25,15 @@ void run(unordered_map<string, int> settings, bool &exit_is_requested){
     manager_inst.game_init(&game_engine_inst, logger.get());
     try {
         manager_inst.run_game_loop();
-    } catch (const runtime_error& e) {
-        logger->error(e.what());
-        logger->info(manager_inst.get_current_game_status());
-        cout << "Game loop interrupted: " << e.what() << endl;
+    } catch (const exception& e) {
         exit_is_requested = true;
+        logger->error(e.what());
+        cout << "Game loop interrupted: " << e.what() << endl;
+        logger->info(manager_inst.get_current_game_status());
+    } catch (...) {
+        exit_is_requested = true;
+        cout << "Unknown error" << endl;
+        logger->error("Unknown error");
     }
 }
 
@@ -41,6 +45,7 @@ int main()
 
     // Session relaunch
     do {
+        cout << endl;
         run(settings, exit_is_requested);
     } while (!exit_is_requested && ask_for_rerun());
 
