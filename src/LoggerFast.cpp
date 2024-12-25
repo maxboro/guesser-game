@@ -3,6 +3,7 @@
 #include <iostream>
 #include <filesystem>
 #include "LoggerFast.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -31,7 +32,7 @@ LoggerFast::~LoggerFast() {
 
 void LoggerFast::_write_to_logfile(const string logging_line){
     if (_log_file.is_open()) {
-        _log_file << _get_current_timestamp() << " - " << logging_line << endl;
+        _log_file << get_current_timestamp_ms() << " - " << logging_line << endl;
         _log_file.flush();
     } else {
         cerr << "Error opening the file!" << endl;

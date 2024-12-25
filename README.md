@@ -10,6 +10,8 @@ Type "e" to exit.
 - n_lives - number of guesses player can make during one game
 - logging - logging enabled (1) / disabled (0)
 - fast_logging - if logging enabled script uses more resource safe logger at 0, more fast and less resource safe at 1
+- reminder_period - period (in seconds) after which to remind to get some rest from the game
+- max_n_reminds - number of reminders, each would be `reminder_period` seconds from previous or from the game start
 
 # Example
 Typical games session looks like this:

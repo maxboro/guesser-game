@@ -1,16 +1,19 @@
 #include <iostream>
 #include <memory>
+#include <atomic>
+#include <thread>
 #include "GameEngine.h"
 #include "GameManager.h"
 #include "Logger.h"
 #include "LoggerFast.h"
 #include "LoggerResSafe.h"
+#include "Reminder.h"
 #include "utils.h"
 
 using namespace std;
 
 // Session loop
-void run(unordered_map<string, int> settings, bool &exit_is_requested){
+void run(unordered_map<string, int> settings, atomic<bool> &exit_is_requested){
     unique_ptr<Logger> logger;
 
     if (settings["fast_logging"] == 1) {
@@ -36,8 +39,13 @@ void run(unordered_map<string, int> settings, bool &exit_is_requested){
 // Runtime loop
 int main()
 {
-    bool exit_is_requested = false;
+    atomic<bool> exit_is_requested{false};
     unordered_map<string, int> settings = read_config();
+
+    // Reminder thread
+    Reminder reminder {exit_is_requested, settings};
+    thread reminder_thread(&Reminder::set_start, &reminder);
+    reminder_thread.detach();
 
     // Session relaunch
     do {
