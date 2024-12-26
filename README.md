@@ -22,17 +22,20 @@ max_val: 10
 n_lives: 3
 logging: 1
 fast_logging: 0
+reminder_period: 500
+max_n_reminds: 3
 Read all
 Settings are loaded.
 
+Reminds are enabled
 Logging is enabled
 Safe logging mode
-write you guess: 4
-Nope. This is not a 4
-write you guess: 2
-Nope. This is not a 2
 write you guess: 1
 Nope. This is not a 1
+write you guess: 2
+Nope. This is not a 2
+write you guess: 3
+Nope. This is not a 3
 No more lives
 End of game loop
 Wanna rerun? y / n: y
@@ -40,16 +43,14 @@ Ok, let's rerun
 
 Logging is enabled
 Safe logging mode
-write you guess: 2
-Nope. This is not a 2
 write you guess: 1
 Nope. This is not a 1
-write you guess: 4
-Nope. This is not a 4
-No more lives
+write you guess: 2
+You guessed! Game over.
 End of game loop
 Wanna rerun? y / n: n
 Ok, no rerun for you
+Reminds are disabled
 End
 ```
 
