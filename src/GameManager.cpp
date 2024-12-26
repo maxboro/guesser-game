@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <random>
+#include <atomic>
 #include "GameManager.h"
 
 using namespace std;
@@ -25,10 +26,11 @@ int GameManager::_get_random_number(int min, int max){
     return randomValue;
 }
 
-void GameManager::game_init(GameEngine *game_engine_inst, Logger *logger){
+void GameManager::game_init(GameEngine *game_engine_inst, Logger *logger, std::atomic<bool> *exit_is_requested_ptr){
     _logger = logger;
     _logger->info("game init");
     _game_engine_inst = game_engine_inst;
+    _exit_is_requested_ptr = exit_is_requested_ptr;
 
     // Set number to guess
     int number_to_guess = _get_random_number(_settings["min_val"], _settings["max_val"]);
@@ -57,7 +59,7 @@ void GameManager::_submit_guess(int number){
 }
 
 void GameManager::run_game_loop(){
-    while (_game_engine_inst->game_status()){
+    while (_game_engine_inst->game_status() && !_exit_is_requested_ptr->load()){
         cout << "write you guess: ";
         string user_input;
         cin >> user_input;

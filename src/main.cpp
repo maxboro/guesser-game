@@ -25,16 +25,16 @@ void run(unordered_map<string, int> settings, atomic<bool> &exit_is_requested){
     GameManager manager_inst {settings};
     GameEngine game_engine_inst {settings};
 
-    manager_inst.game_init(&game_engine_inst, logger.get());
+    manager_inst.game_init(&game_engine_inst, logger.get(), &exit_is_requested);
     try {
         manager_inst.run_game_loop();
     } catch (const exception& e) {
-        exit_is_requested = true;
+        exit_is_requested.store(true);
         logger->error(e.what());
         cout << "Game loop interrupted: " << e.what() << endl;
         logger->info(manager_inst.get_current_game_status());
     } catch (...) {
-        exit_is_requested = true;
+        exit_is_requested.store(true);
         cout << "Unknown error" << endl;
         logger->error("Unknown error");
     }
@@ -57,7 +57,7 @@ int main()
     } while (!exit_is_requested && ask_for_rerun());
 
     if (!exit_is_requested){
-        exit_is_requested = true;
+        exit_is_requested.store(true);
     }
     reminder_thread.join();
     cout << "End" << endl;

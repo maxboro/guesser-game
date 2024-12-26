@@ -28,6 +28,9 @@ void Reminder::set_start(){
 }
 
 void Reminder::_reminder_loop(){
+    cout << "Reminds are enabled" << endl;
+
+    // Time checking loop
     while (!_exit_is_requested_ptr->load()){
         this_thread::sleep_for(chrono::seconds(1));
         _current_timestamp = get_current_timestamp();
@@ -45,5 +48,5 @@ void Reminder::_reminder_loop(){
         }
     }
 
-    cout << "Reminds disabled" << endl;
+    cout << "Reminds are disabled" << endl;
 }
