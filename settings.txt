@@ -4,4 +4,4 @@ n_lives=3
 logging=1
 fast_logging=0
 reminder_period=500
-max_n_reminds=3
+max_n_reminders=3

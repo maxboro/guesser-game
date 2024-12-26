@@ -7,7 +7,7 @@
 #include "Logger.h"
 #include "LoggerFast.h"
 #include "LoggerResSafe.h"
-#include "Reminder.h"
+#include "RemindManager.h"
 #include "utils.h"
 
 using namespace std;
@@ -46,9 +46,9 @@ int main()
     atomic<bool> exit_is_requested{false};
     unordered_map<string, int> settings = read_config();
 
-    // Reminder thread
-    Reminder reminder {&exit_is_requested, settings};
-    thread reminder_thread(&Reminder::set_start, &reminder);
+    // RemindManager thread
+    RemindManager remind_manager {&exit_is_requested, settings};
+    thread reminder_thread(&RemindManager::set_start, &remind_manager);
 
     // Session relaunch
     do {

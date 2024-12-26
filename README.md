@@ -11,7 +11,7 @@ Type "e" to exit.
 - logging - logging enabled (1) / disabled (0)
 - fast_logging - if logging enabled script uses more resource safe logger at 0, more fast and less resource safe at 1
 - reminder_period - period (in seconds) after which to remind to get some rest from the game
-- max_n_reminds - number of reminders, each would be `reminder_period` seconds from previous or from the game start
+- max_n_reminders - number of reminders, each would be `reminder_period` seconds from previous or from the game start
 
 # Example
 Typical games session looks like this:
@@ -23,11 +23,11 @@ n_lives: 3
 logging: 1
 fast_logging: 0
 reminder_period: 500
-max_n_reminds: 3
+max_n_reminders: 3
 Read all
 Settings are loaded.
 
-Reminds are enabled
+Reminders are enabled
 Logging is enabled
 Safe logging mode
 write you guess: 1
@@ -50,7 +50,7 @@ You guessed! Game over.
 End of game loop
 Wanna rerun? y / n: n
 Ok, no rerun for you
-Reminds are disabled
+Reminders are disabled
 End
 ```
 
