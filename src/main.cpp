@@ -47,9 +47,8 @@ int main()
     unordered_map<string, int> settings = read_config();
 
     // Reminder thread
-    Reminder reminder {exit_is_requested, settings};
+    Reminder reminder {&exit_is_requested, settings};
     thread reminder_thread(&Reminder::set_start, &reminder);
-    reminder_thread.detach();
 
     // Session relaunch
     do {
@@ -57,6 +56,10 @@ int main()
         run(settings, exit_is_requested);
     } while (!exit_is_requested && ask_for_rerun());
 
+    if (!exit_is_requested){
+        exit_is_requested = true;
+    }
+    reminder_thread.join();
     cout << "End" << endl;
     return 0;
 }

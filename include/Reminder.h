@@ -4,7 +4,7 @@
 
 class Reminder{
 public:
-    Reminder(std::atomic<bool> &exit_is_requested, std::unordered_map<std::string, int> &settings);
+    Reminder(std::atomic<bool> *exit_is_requested_ptr, std::unordered_map<std::string, int> &settings);
     void set_start();
 
 private:
@@ -13,7 +13,7 @@ private:
     int _reminder_period;
     int _n_reminds;
     int _max_n_reminds;
-    bool _exit_is_requested;
+    std::atomic<bool> * _exit_is_requested_ptr;
 
     void _reminder_loop();
 };

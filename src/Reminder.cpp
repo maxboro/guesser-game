@@ -6,21 +6,29 @@
 
 using namespace std;
 
-Reminder::Reminder(atomic<bool> &exit_is_requested, unordered_map<string, int> &settings){
+Reminder::Reminder(atomic<bool> *exit_is_requested_ptr, unordered_map<string, int> &settings){
     _reminder_period = settings["reminder_period"];
     _max_n_reminds= settings["max_n_reminds"];
-    _exit_is_requested = exit_is_requested;
+    _exit_is_requested_ptr = exit_is_requested_ptr;
 }
 
 
 void Reminder::set_start(){
     _n_reminds = 0;
     _start_timestamp = get_current_timestamp();
-    _reminder_loop();
+    try {
+        _reminder_loop();
+    } catch (const exception& e) {
+        _exit_is_requested_ptr->store(true);
+        cout << "Exception in Reminder thread: " << e.what() << endl;
+    } catch (...) {
+        _exit_is_requested_ptr->store(true);
+        cout << "Unknown error in Reminder thread" << endl;
+    }
 }
 
 void Reminder::_reminder_loop(){
-    while (!_exit_is_requested){
+    while (!_exit_is_requested_ptr->load()){
         this_thread::sleep_for(chrono::seconds(1));
         _current_timestamp = get_current_timestamp();
         bool is_time_to_remind = _current_timestamp - _start_timestamp > _reminder_period;
@@ -32,7 +40,10 @@ void Reminder::_reminder_loop(){
         }
 
         if (_n_reminds >= _max_n_reminds){
+            cout << "That was the last remind" << endl;
             break;
         }
     }
+
+    cout << "Reminds disabled" << endl;
 }
