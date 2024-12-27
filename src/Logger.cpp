@@ -1,7 +1,7 @@
-#include <chrono>
-#include <iomanip>
-#include <sstream>
+#include <unordered_map>
+#include <string>
 #include "Logger.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -9,26 +9,7 @@ using namespace std;
 Logger::Logger(const unordered_map<string, int>& settings){
     _settings = settings;
     _perform_logging = _settings["logging"];
-    _log_file_name = "./logs/run_log"+_get_current_timestamp()+".log";
-}
-
-string Logger::_get_current_timestamp() const {
-    // time_t timestamp = time(NULL);
-    auto now = chrono::system_clock::now();
-    // Convert to a time_t (seconds since epoch)
-    auto now_time_t = chrono::system_clock::to_time_t(now);
-
-    // Extract the fractional seconds part
-    auto now_ms = chrono::duration_cast<chrono::milliseconds>(
-        now.time_since_epoch()) % 1000;
-
-    // Format and print the time with fractional seconds
-    tm tm = *localtime(&now_time_t);
-
-    // String with time with ms
-    ostringstream oss;
-    oss << put_time(&tm, "%Y-%m-%d %H.%M.%S") << '.' << setfill('0') << setw(3) << now_ms.count();
-    return oss.str();
+    _log_file_name = "./logs/run_log"+get_current_timestamp_ms()+".log";
 }
 
 void Logger::info(const string& msg){

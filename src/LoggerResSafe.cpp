@@ -3,6 +3,7 @@
 #include <iostream>
 #include <filesystem>
 #include "LoggerResSafe.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -20,7 +21,7 @@ void LoggerResSafe::_write_to_logfile(const string logging_line){
     ofstream _log_file(_log_file_name, ios::app);
 
     if (_log_file.is_open()) {
-        _log_file << _get_current_timestamp() << " - " << logging_line << endl;
+        _log_file << get_current_timestamp_ms() << " - " << logging_line << endl;
         _log_file.flush();
     } else {
         throw runtime_error("Error opening the file!");
